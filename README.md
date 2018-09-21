@@ -28,7 +28,8 @@ Vue.use(VueRouterColumns);
 
 import { TodoLists, TodoList, Todo, Permissions } from '...'
 
-const router = new VueRouter({
+// meta: {columnsWide: ?} can be specified on any route (default: 1)
+export const router = new VueRouter({
   routes: [
     // /todos
     { path: '/todos', component: TodoLists, children: [
@@ -44,16 +45,18 @@ const router = new VueRouter({
 });
 ```
 
-### App.vue
+#### App.vue
 ```vue
 <template>
+  <!-- default prop values -->
+  <!-- depth: how many router-views this is inside -->
+  <!-- passive: when scrolling is done, false for re-rendering while scrolling -->
   <router-column-view
-    :min-columns="1"    <!-- default -->
-    :max-columns="3"    <!-- default -->
-    :column-width="320" <!-- default -->
-    :depth="0"          <!-- how many router-views this is inside -->
-    :passive="true"     <!-- when scrolling is done, false for re-rendering while scrolling -->
-  >
+    :min-columns="1"
+    :max-columns="3"
+    :column-width="320"
+    :depth="0"
+    :passive="true">
 
     <!-- The columns are placed in here -->
 
@@ -104,7 +107,7 @@ export default {
 ```vue
 <template>
   <router-column>
-    This is a page for editing a todo.
+    This is a page for editing the todo {{ todoId }} in list {{ listId }}.
   </router-column>
 </template>
 <script>
@@ -113,8 +116,8 @@ export default {
     // These values are available on all router columns, but to make them
     // reactive you can add them to data.
     data: vm => ({
-      columnIndex: 0,
-      columnVisibleIndex: 0,
+      columnIndex: 0, // based on routes above, this will always be 2
+      columnVisibleIndex: 0, // 0 to max-columns (0 = first visible column)
       columns: {} // { views, count, start, desired, visible, empty }
     })
   }
