@@ -55,6 +55,16 @@ export default {
     instance.columnVisibleIndex = index - columns.start;
     // =================================
 
+    if (context.listeners.visible) {
+      context.listeners.visible(visible);
+    }
+    if (context.listeners.index) {
+      context.listeners.index(index);
+    }
+    if (context.listeners.visibleIndex) {
+      context.listeners.visibleIndex(index - columns.start);
+    }
+
     return createElement('div', {
       staticClass: 'vue-router-column',
       style: {

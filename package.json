@@ -1,6 +1,6 @@
 {
   "name": "vue-router-columns",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A component to render nested router views in columns depending on screen width.",
   "author": "Philip Diffenderfer <pdiffenderfer@gmail.com>",
   "repository": {

@@ -161,6 +161,8 @@ export default {
       if (changed)
       {
         this.columnData.columns = updated;
+
+        this.$emit('update', updated);
       }
 
       return changed;
@@ -169,7 +171,8 @@ export default {
 
   render (createElement)
   {
-    const { empty, count } = this.columnData.columns;
+    const columns = this.columnData.columns;
+    const { empty, count } = columns;
     const children = [];
 
     if (count > 0)
@@ -194,7 +197,9 @@ export default {
               flexBasis: 0
             }
           }, [
-            this.$slots.empty
+            this.$scopedSlots.empty
+            ? this.$scopedSlots.empty(columns)
+            : this.$slots.empty
           ])
         );
       }

@@ -25,11 +25,13 @@
     <router-column-view
       :min-columns="minColumns"
       :max-columns="maxColumns"
-      :column-width="columnWidth">
-      <template slot="empty">
+      :column-width="columnWidth"
+      @update="columnsUpdate">
+      <template slot="empty" slot-scope="columns">
         <div style="padding: 1em; text-align: center; font-style: italic">
           This is an empty column.
         </div>
+        <pre>{{ columns }}</pre>
       </template>
     </router-column-view>
     <div class="loader" v-if="loading">
@@ -63,6 +65,11 @@ export default {
   },
   mounted() {
     window.App = this
+  },
+  methods: {
+    columnsUpdate(columns) {
+      console.log('columns update', columns);
+    }
   }
 }
 </script>

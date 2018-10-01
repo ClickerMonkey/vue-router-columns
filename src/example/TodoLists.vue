@@ -1,5 +1,8 @@
 <template>
-  <router-column>
+  <router-column
+    @index="updateIndex"
+    @visible="updateVisible"
+    @visible-index="updateVisibleIndex">
     <div class="todo-lists">
       <router-link
         v-for="list in todoLists"
@@ -22,6 +25,17 @@ export default {
         {id: 2, name: 'Personal Project'},
         {id: 3, name: 'Work Project'}
       ]
+    }
+  },
+  methods: {
+    updateVisible(visible) {
+      console.log('updateVisible', visible);
+    },
+    updateIndex(index) {
+      console.log('updateIndex', index);
+    },
+    updateVisibleIndex(index) {
+      console.log('updateVisibleIndex', index);
     }
   }
 }
